@@ -1,21 +1,19 @@
 # Find Agent or Escalate IVR Demo - Using Twilio, ServiceNow & AWS
 
-The repository includes the following folders required to run the demo:
+## Repository Contents
 
-```
+This includes the following folders required to run the demo
+1. demo-ivr-aws-lambda-fns - This folder contains AWS Lambda Function to trigger Twilio Serverless Functions.This finction will be triggered when a Twilio Studio Flow End Event is sent to the AWS Kinesis. 
+2. demo-ivr-servicenow-fns - This function is trigerred as a business rule in ServiceNow when a new incident is created. This function calls the Twilio Serverless Function. 
+3. demo-ivr-twilio-fns - This folder contains functions required to integrate with Twilio Studio. 
+  a. The execute.js function is the main function which is triggered when a new incidednt is created in ServiceNow or from AWS Lambda as a part of Twilio Flow End Event generated in AWS Kinesis 
+  b. get_agent_list.js is a helper function that is called from execute to get the next available agent or the escalation point of contact. This can be changed ot integrate with the backend system of chioce. 
+  c. update_incident.js - This function updates the ServiceNow incident once the agent has accepted the call, or an escalation agent accepted the call or no one accepted the call. 
+  d. Other functions are not used currently.
+4. demo-twilio-aws-kinesis - This folder contains files required to configure AWS Kinesis with Twilio Event Streams
+5. demo-twilio-studio-flows - Twilio Studio Flow has logic to find an agent, escalate and eventually update the ServiceNow incident with status.
+6. assets - This folder has the agent list data. This has to be changed as per your data. 
 
-  1. demo-ivr-aws-lambda-fns - This folder contains AWS Lambda Function to trigger Twilio Serverless Functions.This finction will be triggered when a Twilio Studio Flow End Event is sent to the AWS Kinesis. 
-  2. demo-ivr-servicenow-fns - This function is trigerred as a business rule in ServiceNow when a new incident is created. This function calls the Twilio Serverless Function. 
-  3. demo-ivr-twilio-fns - This folder contains functions required to integrate with Twilio Studio. 
-    a. The execute.js function is the main function which is triggered when a new incidednt is created in ServiceNow or from AWS Lambda as a part of Twilio Flow End Event generated in AWS Kinesis 
-    b. get_agent_list.js is a helper function that is called from execute to get the next available agent or the escalation point of contact. This can be changed ot integrate with the backend system of chioce. 
-    c. update_incident.js - This function updates the ServiceNow incident once the agent has accepted the call, or an escalation agent accepted the call or no one accepted the call. 
-    d. Other functions are not used currently.
-  4. demo-twilio-aws-kinesis - This folder contains files required to configure AWS Kinesis with Twilio Event Streams
-  5. demo-twilio-studio-flows - Twilio Studio Flow has logic to find an agent, escalate and eventually update the ServiceNow incident with status.
-  6. assets - This folder has the agent list data. This has to be changed as per your data. 
-
-```
 
 ## Setup - Follow these steps for deploying the demo
 
