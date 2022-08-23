@@ -1,0 +1,5 @@
+<Response>
+    <Gather input="speech dtmf" timeout="3" numDigits="1">
+        <Say>Please press 1 to accept or 2 to deny the support request.</Say>
+    </Gather>
+</Response>
