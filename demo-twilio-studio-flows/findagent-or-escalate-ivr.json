@@ -1,0 +1,267 @@
+{
+    "description": "Find Agent or Escalate IVR",
+    "states": [
+      {
+        "name": "Trigger",
+        "type": "trigger",
+        "transitions": [
+          {
+            "event": "incomingMessage"
+          },
+          {
+            "event": "incomingCall"
+          },
+          {
+            "event": "incomingConversationMessage"
+          },
+          {
+            "next": "decide_on_action",
+            "event": "incomingRequest"
+          },
+          {
+            "event": "incomingParent"
+          }
+        ],
+        "properties": {
+          "offset": {
+            "x": 0,
+            "y": -160
+          }
+        }
+      },
+      {
+        "name": "decide_on_action",
+        "type": "split-based-on",
+        "transitions": [
+          {
+            "event": "noMatch"
+          },
+          {
+            "next": "call_support",
+            "event": "match",
+            "conditions": [
+              {
+                "friendly_name": "{{flow.data.action}}",
+                "arguments": [
+                  "{{flow.data.action}}"
+                ],
+                "type": "equal_to",
+                "value": "call_support"
+              }
+            ]
+          },
+          {
+            "event": "match",
+            "conditions": [
+              {
+                "friendly_name": "If value equal_to invoke_first",
+                "arguments": [
+                  "{{flow.data.action}}"
+                ],
+                "type": "equal_to",
+                "value": "invoke_first_time"
+              }
+            ]
+          }
+        ],
+        "properties": {
+          "input": "{{flow.data.action}}",
+          "offset": {
+            "x": 70,
+            "y": 130
+          }
+        }
+      },
+      {
+        "name": "send_message",
+        "type": "send-message",
+        "transitions": [
+          {
+            "event": "sent"
+          },
+          {
+            "event": "failed"
+          }
+        ],
+        "properties": {
+          "offset": {
+            "x": -820,
+            "y": 2270
+          },
+          "service": "{{trigger.message.InstanceSid}}",
+          "channel": "{{trigger.message.ChannelSid}}",
+          "from": "{{flow.channel.address}}",
+          "to": "{{contact.channel.address}}",
+          "body": "{% if flow.variables.index >=  flow.variables.size %}  \nWe could not find an agent at this time. \n{% else %}  Logging ticket details with support details.\n{% endif %}"
+        }
+      },
+      {
+        "name": "call_support",
+        "type": "make-outgoing-call-v2",
+        "transitions": [
+          {
+            "next": "support_options",
+            "event": "answered"
+          },
+          {
+            "next": "support_options",
+            "event": "busy"
+          },
+          {
+            "next": "support_options",
+            "event": "noAnswer"
+          },
+          {
+            "next": "support_options",
+            "event": "failed"
+          }
+        ],
+        "properties": {
+          "machine_detection_speech_threshold": "2400",
+          "detect_answering_machine": false,
+          "send_digits": "",
+          "sip_auth_username": "",
+          "offset": {
+            "x": 110,
+            "y": 570
+          },
+          "recording_status_callback": "",
+          "sip_auth_password": "",
+          "recording_channels": "mono",
+          "timeout": 60,
+          "machine_detection": "Enable",
+          "trim": "do-not-trim",
+          "record": false,
+          "machine_detection_speech_end_threshold": "1200",
+          "machine_detection_timeout": "30",
+          "from": "{{flow.channel.address}}",
+          "to": "{{contact.channel.address}}",
+          "machine_detection_silence_timeout": "5000"
+        }
+      },
+      {
+        "name": "support_options",
+        "type": "gather-input-on-call",
+        "transitions": [
+          {
+            "next": "support_accept_call",
+            "event": "keypress"
+          },
+          {
+            "event": "speech"
+          },
+          {
+            "next": "support_accept_call",
+            "event": "timeout"
+          }
+        ],
+        "properties": {
+          "number_of_digits": 1,
+          "speech_timeout": "auto",
+          "offset": {
+            "x": 110,
+            "y": 960
+          },
+          "loop": 1,
+          "finish_on_key": "#",
+          "say": "Hello {{flow.data.selected_agent.name}}. \nThis is regarding the ticket {{flow.data.ticket_no}} . Press 1 to accept , 2 to transfer to next on call engineer or 3 to escalate.",
+          "language": "en-US",
+          "stop_gather": true,
+          "gather_language": "en",
+          "profanity_filter": "true",
+          "timeout": 10
+        }
+      },
+      {
+        "name": "support_accept_call",
+        "type": "split-based-on",
+        "transitions": [
+          {
+            "next": "update_sn_incident",
+            "event": "noMatch"
+          },
+          {
+            "next": "accept_ticket",
+            "event": "match",
+            "conditions": [
+              {
+                "friendly_name": "If value equal_to 1",
+                "arguments": [
+                  "{{widgets.support_options.Digits}}"
+                ],
+                "type": "equal_to",
+                "value": "1"
+              }
+            ]
+          }
+        ],
+        "properties": {
+          "input": "{{widgets.support_options.Digits}}",
+          "offset": {
+            "x": 140,
+            "y": 1290
+          }
+        }
+      },
+      {
+        "name": "accept_ticket",
+        "type": "say-play",
+        "transitions": [
+          {
+            "next": "update_sn_incident",
+            "event": "audioComplete"
+          }
+        ],
+        "properties": {
+          "voice": "alice",
+          "offset": {
+            "x": 620,
+            "y": 1540
+          },
+          "loop": 1,
+          "say": "Thank you for accepting the call. We will log the ticket in service now.",
+          "language": "en-US"
+        }
+      },
+      {
+        "name": "update_sn_incident",
+        "type": "run-function",
+        "transitions": [
+          {
+            "event": "success"
+          },
+          {
+            "event": "fail"
+          }
+        ],
+        "properties": {
+          "service_sid": "ZS9535ea7ceaf87177b383d95e1963b16e",
+          "environment_sid": "ZE1d96b87a7ea1a80fb1ae9ee20c1d8122",
+          "offset": {
+            "x": 190,
+            "y": 1860
+          },
+          "function_sid": "ZH5d0631cc6eff5264a0c0a8c9e6d34a94",
+          "parameters": [
+            {
+              "value": "{{widgets.support_options.Digits}}",
+              "key": "case_status"
+            },
+            {
+              "value": "{{flow.data.selected_agent.name}}",
+              "key": "agent_name"
+            },
+            {
+              "value": "{{flow.data.sys_id}}",
+              "key": "sys_id"
+            }
+          ],
+          "url": "https://adobe-ivr-service-8284.twil.io/update_incident"
+        }
+      }
+    ],
+    "initial_state": "Trigger",
+    "flags": {
+      "allow_concurrent_calls": true
+    }
+  }

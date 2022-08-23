@@ -1,20 +1,26 @@
-# ServiceNow Twilio Studio Integration for Real-Time, Bi-Directional Incident Mangement
+# Twilio-ServiceNow-AWS - Find Agent or Escalate IVR UseCase
 
-The repository includes the following:
+The repository includes the following folders required to run the demo:
 
-1. ServiceNow Business Rule Scripts - we use these scripts to create automated outbound notifications from ServiceNow Incidents.
-2. Twilio Studio Flows - the scripts in step #1 call Twilio Studio Flow Execution API, and the flows here provide the functionality to facilitate 2-way communications over SMS and/or Voice
-3. Twilio Functions - these functions provide web service calls to ServiceNow to perform CRUD operations against an Incident record as it's being worked by an assigned ServiceNow Agent.
+1. demo-ivr-aws-lambda-fns - This folder contains AWS Lambda Function to trigger Twilio Serverless Functions.This finction will be triggered when a Twilio Studio Flow End Event is sent to the AWS Kinesis. 
+2. demo-ivr-servicenow-fns - This function is trigerred as a business rule in ServiceNow when a new incident is created. This function calls the Twilio Serverless Function. 
+3. demo-ivr-twilio-fns - This folder contains functions required to integrate with Twilio Studio. 
+  a. The execute.js function is the main function which is triggered when a new incidednt is created in ServiceNow or from AWS Lambda as a part of Twilio Flow End Event generated in AWS Kinesis 
+  b. get_agent_list.js is a helper function that is called from execute to get the next available agent or the escalation point of contact. This can be changed ot integrate with the backend system of chioce. 
+  c. update_incident.js - This function updates the ServiceNow incident once the agent has accepted the call, or an escalation agent accepted the call or no one accepted the call. 
+  d. Other functions are not used currently.
+4. demo-twilio-aws-kinesis - This folder contains files required to configure AWS Kinesis with Twilio Event Streams
+5. demo-twilio-studio-flows - Twilio Studio Flow has logic to find an agent, escalate and eventually update the ServiceNow incident with status.
+6. assets - This folder has the agent list data. This has to be changed as per your data. 
 
-# Corresponding Twilio Blog - Jumpstart and LevelUp your ServiceNow Incident Management Solution with Twilio
 
-There is a pending blog post that walks through a full POC development using the solution provided in this repository. I will link to that blog once it's posted. The Blog Post reference will help you understand how to setup steps #1 and #2 above. The rest of this readme will be for streamlining step #3, such that you can leverage the Twilio CLI for local debugging and deploying to Twilio Serverless.
+## Setup - Follow these steps for deploying the demo
 
-Thus, if you wish to follow that blog from start to finish without having to do any local javascript development, you can simply walk through the blog step by step in lieu of the below instrucitons.
+### Setup ServiceNow 
 
-However, if you're interested in being able to streamline your development by using the Twilio CLI and Serverless Toolkit, then you can use the instructions below to do local development and deploy your functions to Twilio Serverlesss via the CLI. I would recommend this route for intermediate to advanced developers looking to interate and manage changes over time.
+### Setup AWS Components
 
-## Local Development Setup (Optional)
+### Setup Twilio 
 
 If you don't want to do local development, then please follow the [Blog Post](www.twilio.com/blog) above. If you're ambitious and want to do local development, then read on...
 
