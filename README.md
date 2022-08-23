@@ -82,26 +82,30 @@ Clone the repository
 
 ### Setup ServiceNow developer instance
 
-```Step 1:``` Signup for a ServiceNow [developer instance](https://developer.servicenow.com/dev.do). <br/>
-```Step 2:``` Sign in with your ServiceNow ID.<br/>
-```Step 3:``` Once signed-in, create a ServiceNow instance in any location of your choice. Note: This demo was tested on the SanDiego instance. <br/>
-```Step 4:``` Click on Start Building. You will land on the ServiceNow developer instnace home screen. <br/>
-```Step 5:``` Setup the demo. <br/>
+```Step 1:``` Signup for a ServiceNow [developer instance](https://developer.servicenow.com/dev.do). <br/><br/>
+
+```Step 2:``` Sign in with your ServiceNow ID.<br/><br/>
+
+```Step 3:``` Once signed-in, create a ServiceNow instance in any location of your choice. Note: This demo was tested on the SanDiego instance. <br/><br/>
+
+```Step 4:``` Click on Start Building. You will land on the ServiceNow developer instnace home screen. <br/><br/>
+
+```Step 5:``` Setup the demo. <br/><br/>
   1. Create demo user - This user will be able to create the incident.
-      a. Click All > System Security > Users and Groups > Users
-      b. Click on New
-      c. Fill details as per the image below. The used should have access to call the ServiceNow APIs'. 
-      d. Set the password. 
-      e. Copy the username(twilio_demo_user) and password. This will be required while setting up Twilio Serverless Functions.      
+    a. Click All > System Security > Users and Groups > Users
+    b. Click on New
+    c. Fill details as per the image below. The used should have access to call the ServiceNow APIs'. 
+    d. Set the password. 
+    e. Copy the username(twilio_demo_user) and password. This will be required while setting up Twilio Serverless Functions.   <br/><br/> 
   2. Create business rules - This business rule will be triggered when a high priority incident is creatd in ServiceNow.
-      a. Click All > System Definition > Business Rules
-      b. Click on New
-      c. Fill details as per the image below
-      d. Click on Advanced tab. 
-        - Open twilio-servicenow-aws-findagent-or-escalate-ivr/twilio_studio_new_incident.js
-        - Modify TWILIO_FUNCTION_URL value to point to the Twilio Serverless function execute.js deployed as per the steps above.
-        - Copy the contents of execute.js into the "Advanced Script" tab in ServiceNow.
-        - Submit to create the business rule.
+    a. Click All > System Definition > Business Rules
+    b. Click on New
+    c. Fill details as per the image below
+    d. Click on Advanced tab. 
+      - Open twilio-servicenow-aws-findagent-or-escalate-ivr/twilio_studio_new_incident.js
+      - Modify TWILIO_FUNCTION_URL value to point to the Twilio Serverless function execute.js deployed as per the steps above.
+      - Copy the contents of execute.js into the "Advanced Script" tab in ServiceNow.
+      - Submit to create the business rule.
 
 
 # DISCLAIMER
