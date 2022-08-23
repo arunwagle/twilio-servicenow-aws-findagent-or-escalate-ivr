@@ -4,7 +4,7 @@ twilio profiles:use Twilio-AW-Profile
 ./create_kinesis_stream.sh twilio-events 1 | jq . > twilio-sink.json 
 
 
-twilio api:events:v1:sinks:create --description "For Adobe POC with Twilio Studio" \
+twilio api:events:v1:sinks:create --description "For FindAgent Or Escalate IVR POC with Twilio Studio" \
   --sink-configuration '{"arn":"arn:aws:kinesis:us-east-1:776262733296:stream/twilio-events","role_arn":"arn:aws:iam::776262733296:role/twilio-events-kinesis-write","external_id":"460c038ecde1d7a46cedb666fb51bf01a68e278db0b8395a8077a295baae74e416e5a3906f31e487"}' \
   --sink-type kinesis
 
