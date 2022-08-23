@@ -28,26 +28,26 @@ Clone the repository
 
 ### Setup Twilio 
 
-```Step 1:``` Signup for a [Twilio account](https://www.twilio.com/try-twilio). <br/><br/>
+```Step 1:``` **Signup** for a [Twilio account](https://www.twilio.com/try-twilio). <br/><br/>
 
-```Step 2:``` Provision a [Phone Number](https://www.twilio.com/console/phone-numbers/incoming).The Twilio phone number to initiate calls from during the Flow's Execution. Available as variable `{{flow.channel.address}}`.  <br/><br/>
+```Step 2:``` **Provision** a [Phone Number](https://www.twilio.com/console/phone-numbers/incoming).The Twilio phone number to initiate calls from during the Flow's Execution. Available as variable `{{flow.channel.address}}`.  <br/><br/>
 
-```Step 3:``` Deploy the Twilio Serverless functions. The functions are scoped public for demo purposes but in real world needs to be secured with proper auth. <br/><br/>
+```Step 3:``` Deploy the **Twilio Serverless functions**. The functions are scoped public for demo purposes but in real world needs to be secured with proper auth. <br/><br/>
   1. Click Functions and Assets > Services > Create Service.
   2. Provide a service name - findagent-or-escalate-ivr-service
   3. Click Add > Add Asset
-    a. Provide name - agent_list.json. Change scope to public
+    a. Provide name - agent_list.json. Change scope to **public**
     b. Copy the contents of twilio-servicenow-aws-findagent-or-escalate-ivr/assets/agent_list.json to the editor.
     c. Modify the phone numbers to use for agent and escalation list to match the test phone numbers to be used for the demo.
     d. Save.
   3. Click Add > Add Function
-    a. Provide function name - /execute. Change function scope to public
+    a. Provide function name - /execute. Change function scope to **public**
     b. Copy the contents of twilio-servicenow-aws-findagent-or-escalate-ivr/demo-ivr-twilio-fns/execute.js to the editor.
     c. Modify AGENT_LIST_URL in execute.js to to point to the url of the asset deployed above. 
     c. Save.  
   4. Deploy All <br/><br/>
 
-```Step 4:``` Create Studio Flow.  <br/>
+```Step 4:``` Create **Studio Flow**.  <br/>
   1. Click Studio > + to create a new flow.
   2. Provide a flow name - Find Agent or Escalate IVR
   3. Select "Import from JSON" template > Next > Copy the json from twilio-servicenow-aws-findagent-or-escalate-ivr/demo-twilio-studio-flows/findagent-or-escalate-ivr.json
