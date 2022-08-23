@@ -78,7 +78,7 @@ Clone the repository
   2. Make sure the AWS credentials and AWS CLI are setup correctly as mentioned in steps above.
   3. Make sure the [Twilio CLI]((https://www.twilio.com/docs/twilio-cli/plugins#available-plugins) and [create profile](https://www.twilio.com/docs/twilio-cli/general-usage) is setup and created sucessfully.
   4. [Setup Twilio Streams](https://www.twilio.com/docs/events/eventstreams-quickstart)
-  Note: Highlevel steps are mentioned in twilio-servicenow-aws-findagent-or-escalate-ivr/create-kinesis-stream-instruction.txt
+  
 
 ### Setup ServiceNow developer instance
 
@@ -96,7 +96,7 @@ Clone the repository
     b. Click on New
     c. Fill details as per the image below. The used should have access to call the ServiceNow APIs'. 
     d. Set the password. 
-    e. Copy the username(twilio_demo_user) and password. This will be required while setting up Twilio Serverless Functions.   <br/><br/> 
+    e. Copy the username(twilio_demo_user) and password. This will be required while setting up Twilio Serverless Functions.   
   2. Create business rules - This business rule will be triggered when a high priority incident is creatd in ServiceNow.
     a. Click All > System Definition > Business Rules
     b. Click on New
