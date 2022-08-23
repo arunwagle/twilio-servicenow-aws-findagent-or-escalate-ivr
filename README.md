@@ -30,10 +30,13 @@ Clone the repository
 ### Setup Twilio 
 
 ```Step 1:``` Signup for a [Twilio account](https://www.twilio.com/try-twilio). <br/><br/>
+
 ```Step 2:``` Provision a [Phone Number](https://www.twilio.com/console/phone-numbers/incoming).The Twilio phone number to initiate calls from during the Flow's Execution. Available as variable `{{flow.channel.address}}`.  <br/><br/>
+
 ```Step 3:``` Deploy the Twilio Serverless functions. The functions are scoped public for demo purposes but in real world needs to be secured with proper auth. <br/><br/>
   1. Deploy execute.js and note the URL. This url will be used in the ServiceNow deploymemnt below.
   2. Deploy get_agent_list.js <br/><br/>
+
 ```Step 4:``` Create Studio Flow.  <br/>
   1. Click Studio > + to create a new flow.
   2. Provide a flow name - Find Agent or Escalate IVR
