@@ -39,45 +39,45 @@ Clone the repository
 ```Step 2:``` **Provision** a [Phone Number](https://www.twilio.com/console/phone-numbers/incoming).The Twilio phone number to initiate calls from during the Flow's Execution. Available as variable `{{flow.channel.address}}`.  <br/><br/>
 
 ```Step 3:``` Deploy the **Twilio Serverless functions**. The functions are scoped public for demo purposes but in real world needs to be secured with proper auth. <br/>
-  1. Click Functions and Assets > Services > Create Service.
-  2. Provide a service name - findagent-or-escalate-ivr-service
-  3. Click Add > Add Asset
-    - Provide name - agent_list.json. Change scope to **public**
-    - Copy the contents of twilio-servicenow-aws-findagent-or-escalate-ivr/assets/agent_list.json to the editor.
-    - Modify the phone numbers to use for agent and escalation list to match the test phone numbers to be used for the demo.
-    - Save.
-  3. Click Add > Add Function
-    - Provide function name - /execute. Change function scope to **public**
-    - Copy the contents of twilio-servicenow-aws-findagent-or-escalate-ivr/demo-ivr-twilio-fns/execute.js to the editor.
-    - Modify AGENT_LIST_URL in execute.js to to point to the url of the asset deployed above. 
-    - Save.
-  4. Click Add > Add Function
-    - Provide function name - /update_incident. Change function scope to **public**
-    - Copy the contents of twilio-servicenow-aws-findagent-or-escalate-ivr/demo-ivr-twilio-fns/update_incident.js to the editor.
-    - Modify AGENT_LIST_URL in execute.js to to point to the url of the asset deployed above. 
-    - Save.
-  5. Click Settings > Dependencies
-    - Add axios dependencies
-  6. Click Settings > Environment variables    
-    - SN_API_TABLE_ROOT - Your ServiceNow developer instance "Table" url https://dev86397.service-now.com/api/now/table/    
-    - SN_USER - ServiceNow username(twilio_demo_user)
-    - SN_PASSWORD - Password of the above user.
-    - FROM - Phone number provisioned in Step2 above
-    - FLOW_SID - Flow Sid. This is available from the Studio > Flows 
-  7. Deploy All <br/><br/>
+  1.  Click Functions and Assets > Services > Create Service.
+  2.  Provide a service name - findagent-or-escalate-ivr-service
+  3.  Click Add > Add Asset
+      - Provide name - agent_list.json. Change scope to **public**
+      - Copy the contents of twilio-servicenow-aws-findagent-or-escalate-ivr/assets/agent_list.json to the editor.
+      - Modify the phone numbers to use for agent and escalation list to match the test phone numbers to be used for the demo.
+      - Save.
+  3.  Click Add > Add Function
+      - Provide function name - /execute. Change function scope to **public**
+      - Copy the contents of twilio-servicenow-aws-findagent-or-escalate-ivr/demo-ivr-twilio-fns/execute.js to the editor.
+      - Modify AGENT_LIST_URL in execute.js to to point to the url of the asset deployed above. 
+      - Save.
+  4.  Click Add > Add Function
+      - Provide function name - /update_incident. Change function scope to **public**
+      - Copy the contents of twilio-servicenow-aws-findagent-or-escalate-ivr/demo-ivr-twilio-fns/update_incident.js to the editor.
+      - Modify AGENT_LIST_URL in execute.js to to point to the url of the asset deployed above. 
+      - Save.
+  5.  Click Settings > Dependencies
+      - Add axios dependencies
+  6.  Click Settings > Environment variables    
+      - SN_API_TABLE_ROOT - Your ServiceNow developer instance "Table" url https://dev86397.service-now.com/api/now/table/    
+      - SN_USER - ServiceNow username(twilio_demo_user)
+      - SN_PASSWORD - Password of the above user.
+      - FROM - Phone number provisioned in Step2 above
+      - FLOW_SID - Flow Sid. This is available from the Studio > Flows 
+  7.  Deploy All <br/><br/>
 
 ```Step 4:``` Create **Studio Flow**.  <br/>
-  1. Click Studio > + to create a new flow.
-  2. Provide a flow name - Find Agent or Escalate IVR
-  3. Select "Import from JSON" template > Next > Copy the json from twilio-servicenow-aws-findagent-or-escalate-ivr/demo-twilio-studio-flows/findagent-or-escalate-ivr.json
-  4. Studio Flow is created. <br/><br/>
+  1.  Click Studio > + to create a new flow.
+  2.  Provide a flow name - Find Agent or Escalate IVR
+  3.  Select "Import from JSON" template > Next > Copy the json from twilio-servicenow-aws-findagent-or-escalate-ivr/demo-twilio-studio-flows/findagent-or-escalate-ivr.json
+  4.  Studio Flow is created. <br/><br/>
     ![Flow Diagram](/assets/TwilioStudioFlow.png?raw=true)
 
 ```Step 5:``` Setup **Twilio Event Streams**.  <br/>  
-  1. All the code required for setting up is available at twilio-servicenow-aws-findagent-or-escalate-ivr/demo-twilio-aws-kinesis/*
-  2. Make sure the AWS credentials and AWS CLI are setup correctly as mentioned in steps above.
-  3. Make sure the [Twilio CLI]((https://www.twilio.com/docs/twilio-cli/plugins#available-plugins) and [create profile](https://www.twilio.com/docs/twilio-cli/general-usage) is setup and created sucessfully.
-  4. [Setup Twilio Streams](https://www.twilio.com/docs/events/eventstreams-quickstart)
+  1.  All the code required for setting up is available at twilio-servicenow-aws-findagent-or-escalate-ivr/demo-twilio-aws-kinesis/*
+  2.  Make sure the AWS credentials and AWS CLI are setup correctly as mentioned in steps above.
+  3.  Make sure the [Twilio CLI]((https://www.twilio.com/docs/twilio-cli/plugins#available-plugins) and [create profile](https://www.twilio.com/docs/twilio-cli/general-usage) is setup and created sucessfully.
+  4.  [Setup Twilio Streams](https://www.twilio.com/docs/events/eventstreams-quickstart)
   
 
 ### Setup ServiceNow developer instance
@@ -91,21 +91,21 @@ Clone the repository
 ```Step 4:``` Click on Start Building. You will land on the ServiceNow developer instance home screen. <br/><br/>
 
 ```Step 5:``` Setup the demo. <br/>
-  1. Create demo user - This user will be able to create the incident.    
-    - Click All > System Security > Users and Groups > Users 
-    - Click on New 
-    - Fill details as per the image below. The used should have access to call the ServiceNow APIs'. 
-    - Set the password. 
-    - Copy the username(twilio_demo_user) and password. This will be required while setting up Twilio Serverless Functions.  
-  2. Create business rules - This business rule will be triggered when a high priority incident is creatd in ServiceNow.    
-    - Click All > System Definition > Business Rules 
-    - Click on New 
-    - Fill details as per the image below  
-    - Click on Advanced tab.  
-      - Open twilio-servicenow-aws-findagent-or-escalate-ivr/twilio_studio_new_incident.js  
-      - Modify TWILIO_FUNCTION_URL value to point to the Twilio Serverless function execute.js deployed as per the steps above. 
-      - Copy the contents of execute.js into the "Advanced Script" tab in ServiceNow. 
-      - Submit to create the business rule. 
+  1.  Create demo user - This user will be able to create the incident.    
+      - Click All > System Security > Users and Groups > Users 
+      - Click on New 
+      - Fill details as per the image below. The used should have access to call the ServiceNow APIs'. 
+      - Set the password. 
+      - Copy the username(twilio_demo_user) and password. This will be required while setting up Twilio Serverless Functions.  
+  2.  Create business rules - This business rule will be triggered when a high priority incident is creatd in ServiceNow.    
+      - Click All > System Definition > Business Rules 
+      - Click on New 
+      - Fill details as per the image below  
+      - Click on Advanced tab.  
+        - Open twilio-servicenow-aws-findagent-or-escalate-ivr/twilio_studio_new_incident.js  
+        - Modify TWILIO_FUNCTION_URL value to point to the Twilio Serverless function execute.js deployed as per the steps above. 
+        - Copy the contents of execute.js into the "Advanced Script" tab in ServiceNow. 
+        - Submit to create the business rule. 
 
 
 # DISCLAIMER
