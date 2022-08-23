@@ -39,7 +39,7 @@ Clone the repository
   2. Provide a flow name - Find Agent or Escalate IVR
   3. Select "Import from JSON" template > Next > Copy the json from twilio-servicenow-aws-findagent-or-escalate-ivr/findagent-or-escalate-ivr.json
   4. Studio Flow is created.
-    ![alt text](https://github.com/arunwagle/twilio-servicenow-aws-findagent-or-escalate-ivr/tree/main/assets/TwilioStudioFlow.png?raw=true)
+    ![Flow Diagram](/twilio-servicenow-aws-findagent-or-escalate-ivr/tree/main/assets/TwilioStudioFlow.png?raw=true)
 
 
 ### Setup ServiceNow developer instance
