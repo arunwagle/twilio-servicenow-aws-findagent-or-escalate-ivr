@@ -77,7 +77,7 @@ Clone the repository
   1.  All the code required for setting up is available at twilio-servicenow-aws-findagent-or-escalate-ivr/demo-twilio-aws-kinesis/*
   2.  Make sure the AWS credentials and AWS CLI are setup correctly as mentioned in steps above.
   3.  Make sure the [Twilio CLI]((https://www.twilio.com/docs/twilio-cli/plugins#available-plugins) and [create profile](https://www.twilio.com/docs/twilio-cli/general-usage) is setup and created sucessfully.
-  4.  [Setup Twilio Streams](https://www.twilio.com/docs/events/eventstreams-quickstart)      
+  4.  Follow the steps in [Setup Twilio Streams](https://www.twilio.com/docs/events/eventstreams-quickstart) or run below steps.
       ```
         <!-- use active Twilio account to create the stream -->
         twilio profiles:use Twilio-AW-Profile
