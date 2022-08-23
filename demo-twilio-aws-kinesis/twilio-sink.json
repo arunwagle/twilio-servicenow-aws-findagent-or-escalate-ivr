@@ -1,5 +1,0 @@
-{
-  "arn": "arn:aws:kinesis:us-east-1:776262733296:stream/twilio-events",
-  "role_arn": "arn:aws:iam::776262733296:role/twilio-events-kinesis-write",
-  "external_id": "460c038ecde1d7a46cedb666fb51bf01a68e278db0b8395a8077a295baae74e416e5a3906f31e487"
-}
