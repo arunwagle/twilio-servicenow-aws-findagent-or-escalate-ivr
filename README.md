@@ -77,7 +77,40 @@ Clone the repository
   1.  All the code required for setting up is available at twilio-servicenow-aws-findagent-or-escalate-ivr/demo-twilio-aws-kinesis/*
   2.  Make sure the AWS credentials and AWS CLI are setup correctly as mentioned in steps above.
   3.  Make sure the [Twilio CLI]((https://www.twilio.com/docs/twilio-cli/plugins#available-plugins) and [create profile](https://www.twilio.com/docs/twilio-cli/general-usage) is setup and created sucessfully.
-  4.  [Setup Twilio Streams](https://www.twilio.com/docs/events/eventstreams-quickstart)
+  4.  [Setup Twilio Streams](https://www.twilio.com/docs/events/eventstreams-quickstart)      
+      ```
+        <!-- use active Twilio account to create the stream -->
+        twilio profiles:use Twilio-AW-Profile
+        <!-- 
+        Create the stream
+        stream name = twilio-events
+        twilio-sink.json = File where the stream creation output is written
+         -->
+        ./create_kinesis_stream.sh twilio-events 1 | jq . > twilio-sink.json 
+
+        <!-- 
+        Create the sink
+        arn = Get the arn value from twilio-sink.json
+        role_arn = Get the role_arn value from twilio-sink.json
+        external_id = Get the external_id value from twilio-sink.json
+         -->
+        twilio api:events:v1:sinks:create --description "For FindAgent Or Escalate IVR POC with Twilio Studio" \
+          --sink-configuration '{"arn":"arn:aws:kinesis:us-east-1:XXXXXXX:stream/twilio-events","role_arn":"arn:aws:iam::XXXXXXXXX:role/twilio-events-kinesis-write","external_id":"XXXXXXXXXXXXXXXXXXXXXX"}' \
+          --sink-type kinesis
+
+        <!-- 
+        Validate the sink. This step is required before you can start using the sink. 
+        Sid = Sid of the sink from above . You can also get the Sid from the Twilio Console > Event Streams > Manage > Select Sink > Properties
+         -->
+        twilio api:events:v1:sinks:test:create --sid ${sid from above}
+
+        <!-- 
+        Test the sink
+        Run twilio-servicenow-aws-findagent-or-escalate-ivr/cat_kinesis.sh
+        Note: You can test the sink from the console as well.
+         -->
+        ./cat_kinesis.sh twilio-events
+      ```
   
 
 ### Setup ServiceNow developer instance
@@ -110,4 +143,4 @@ Clone the repository
 
 # DISCLAIMER
 
-Notice: This code and the information contained herein is not meant to be used in a production deployment. Rather, this code is intended to serve as a means to springboard your Twilio + ServiceNow development, such that you have a model/framework/samples to start from when considering your own custom development of a ServiceNow + Twilio integration. Twilio and its employees do not provide any SLA for this code - it is meant to be used "as-is" to help customers with a reference point for their own use cases and development. Twilio recommends that you consult with your legal counsel to make sure that you are complying with all applicable laws in connection with communications you transmit and receive using Twilio. Ultimately, you are responsible for ensuring that your use of Twilio complies with all applicable laws and regulations. Please also refer to our [**Terms of Service**](https://www.twilio.com/legal/tos>) and [**Acceptable Use Policy**](https://www.twilio.com/legal/aup) for more information.
+Notice: This code and the information contained herein is not meant to be used in a production deployment. Rather, this code is intended to serve as a means to springboard your Twilio + ServiceNow development, such that you have a model/framework/samples to start from when considering your own custom development of a ServiceNow + Twilio integration. Twilio and its employees do not provide any SLA for this code - it is meant to be used "as-is" to help customers with a reference point for their own use cases and development. Twilio recommends that you consult with your legal counsel to make sure that you are complying with all applicable laws in connection with communications you transmit and receive using Twilio. Ultimately, you are responsible for ensuring that your use of Twilio complies with all applicable laws and regulations. Please also refer to our [**Terms of Service**](https://www.twilio.com/legal/tos) and [**Acceptable Use Policy**](https://www.twilio.com/legal/aup) for more information.
