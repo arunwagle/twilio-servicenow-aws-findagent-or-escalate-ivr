@@ -13,11 +13,6 @@
   request.setEndpoint(TWILIO_FUNCTION_URL);
   request.setHttpMethod('POST');
 
-  //Your Twilio Account SID and Auth Token to Authenticate this request
-  // var user = 'AC8db354e50808dd1a53f83a3822abcf52';
-  // var password = '453192fa355e1645483d3a28e1cf2fab';
-
-  // request.setBasicAuth(user, password);
 
   //Request Headers for the most basic type of request for POC. Note that Twilio cannot accept a JSON blob, so Content-Type must be what is defined here
   request.setRequestHeader('Accept', '*/*');

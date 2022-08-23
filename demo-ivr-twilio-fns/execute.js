@@ -6,7 +6,6 @@ exports.handler = function(context, event, callback) {
   
   const flow_sid = context.FLOW_SID;
   console.log('flow_sid', flow_sid);
-  // SID of messaging service
   const from = context.FROM;
   console.log('from', from);
   // This number is picked up from the agent list
