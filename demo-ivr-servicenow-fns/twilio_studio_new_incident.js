@@ -2,7 +2,7 @@
   //sys_id record for whatever object (eg. specific Incident record) is triggered by this Business Rule
   var id = current.getValue('sys_id');
   var assignedTo = current.getValue('assigned_to');
-  var TWILIO_FUNCTION_URL = "https://findagent-or-escalate-ivr-service-8284.twil.io/execute";
+  var TWILIO_FUNCTION_URL = "https://findagent-or-escalate-ivr-service-XXXX.twil.io/execute";
 
   gs.info('assigned to: ' + assignedTo);
   gs.info('My sys_id is: ' + id);

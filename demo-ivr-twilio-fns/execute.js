@@ -1,5 +1,5 @@
-let agent_list_url = "https://adobe-ivr-service-8284.twil.io/agent_list.json";
-
+// let AGENT_LIST_URL = [Modify- Add the url of the static asset];
+let AGENT_LIST_URL = 'https://findagent-or-escalate-ivr-service-XXX.twil.io/agent_list.json';
 exports.handler = function(context, event, callback) {
   const axios = require("axios");
   const twilioClient = context.getTwilioClient();
@@ -17,7 +17,7 @@ exports.handler = function(context, event, callback) {
   var flow_input = '';
   
   axios
-    .get(agent_list_url)
+    .get(AGENT_LIST_URL)
     .then(res => {
       console.log(`List: ${res.data}`);  
       agent_list = res.data.agent_list;       

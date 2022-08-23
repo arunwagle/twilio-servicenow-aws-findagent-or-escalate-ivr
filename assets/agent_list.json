@@ -1,16 +1,16 @@
 {
   "agent_list":[
     {
-      "name": "Arun Wagle",
-      "phone_no": "+12016588268",
+      "name": "Agent 1",
+      "phone_no": "+1XXXXXXXXXX",
       "role": "Customer Support",
       "index": 1     
     }
   ],
   "escalation_list":[    
     {
-      "name": "Naina Hegde",
-      "phone_no": "+12122035048",
+      "name": "Director 1",
+      "phone_no": "+1XXXXXXXXXX",
       "role": "Director",
       "index": 0      
     }
