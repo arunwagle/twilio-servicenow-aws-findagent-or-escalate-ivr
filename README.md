@@ -102,10 +102,10 @@ Clone the repository
     b. Click on New
     c. Fill details as per the image below
     d. Click on Advanced tab. 
-      Open twilio-servicenow-aws-findagent-or-escalate-ivr/twilio_studio_new_incident.js
-      Modify TWILIO_FUNCTION_URL value to point to the Twilio Serverless function execute.js deployed as per the steps above.
-      Copy the contents of execute.js into the "Advanced Script" tab in ServiceNow.
-      Submit to create the business rule.
+       Open twilio-servicenow-aws-findagent-or-escalate-ivr/twilio_studio_new_incident.js
+      - Modify TWILIO_FUNCTION_URL value to point to the Twilio Serverless function execute.js deployed as per the steps above.
+      - Copy the contents of execute.js into the "Advanced Script" tab in ServiceNow.
+      - Submit to create the business rule.
 
 
 # DISCLAIMER
