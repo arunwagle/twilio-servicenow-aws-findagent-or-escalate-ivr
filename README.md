@@ -15,9 +15,27 @@ This includes the following folders required to run the demo
 6. assets - This folder has the agent list data. This has to be changed as per your data. 
 
 
-## Setup - Follow these steps for deploying the demo
+## Setup - Follow these steps for deploying the demo 
 
-### Setup ServiceNow 
+### Get the code
+
+Clone the repository
+```
+  git clone https://github.com/arunwagle/twilio-servicenow-aws-findagent-or-escalate-ivr.git
+  cd twilio-servicenow-aws-findagent-or-escalate-ivr.git
+
+```
+
+
+### Setup ServiceNow developer instance
+
+```Step 1:``` Signup for a ServiceNow [developer instance](https://developer.servicenow.com/dev.do). <br/>
+```Step 2:``` Sign in with your ServiceNow ID.<br/>
+```Step 3:``` Once signed-in, create a ServiceNow instance in any location of your choice. Note: This demo was tested on the SanDiego instance. <br/>
+```Step 4:``` Click on Start Building. You will land on the ServiceNow developer instnace home screen. <br/>
+```Step 4:``` Open your favorite IDE (eg. Visual Studio Code) and open the working directory associated with this repository to get started.<br/>
+```Step 5:``` Open a terminal in your IDE (or another terminal program of your choice) to get started.<br/>
+```Step 6:``` From the root of your working directory, install the dependencies as follows (see the package.json file for details on what will be installed)<br/>
 
 ### Setup AWS Components
 
