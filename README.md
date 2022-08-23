@@ -17,15 +17,15 @@ This includes the following folders required to run the demo
 
 ## Setup - Follow these steps for deploying the demo 
 
-### Get the code
+### Get the code from github
 
 Clone the repository
 ```
   git clone https://github.com/arunwagle/twilio-servicenow-aws-findagent-or-escalate-ivr.git
-  cd twilio-servicenow-aws-findagent-or-escalate-ivr.git
+
+  cd twilio-servicenow-aws-findagent-or-escalate-ivr
 
 ```
-
 
 ### Setup ServiceNow developer instance
 
@@ -33,9 +33,17 @@ Clone the repository
 ```Step 2:``` Sign in with your ServiceNow ID.<br/>
 ```Step 3:``` Once signed-in, create a ServiceNow instance in any location of your choice. Note: This demo was tested on the SanDiego instance. <br/>
 ```Step 4:``` Click on Start Building. You will land on the ServiceNow developer instnace home screen. <br/>
-```Step 4:``` Open your favorite IDE (eg. Visual Studio Code) and open the working directory associated with this repository to get started.<br/>
-```Step 5:``` Open a terminal in your IDE (or another terminal program of your choice) to get started.<br/>
-```Step 6:``` From the root of your working directory, install the dependencies as follows (see the package.json file for details on what will be installed)<br/>
+```Step 5:``` Setup the demo. <br/>
+  1. Create demo user - This user will be able to create the incident.
+  2. Create business rules - This business rule will be triggered when a high priority incident is creatd in ServiceNow.
+      a. Click All > System Definition > Business Rules
+      b. Click on New
+      c. Fill details as per the image below
+      d. Click on Advanced tab. 
+        - Open twilio-servicenow-aws-findagent-or-escalate-ivr/twilio_studio_new_incident.js
+        - Modify TWILIO_FUNCTION_URL value to point to the Twilio Serverless function execute.js deployed as per the steps above.
+        - Copy the contents of execute.js into the "Advanced Script" tab in ServiceNow.
+        - Submit to create the business rule.
 
 ### Setup AWS Components
 

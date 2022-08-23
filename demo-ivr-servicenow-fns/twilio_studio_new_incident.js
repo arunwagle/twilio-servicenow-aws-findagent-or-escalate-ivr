@@ -2,6 +2,7 @@
   //sys_id record for whatever object (eg. specific Incident record) is triggered by this Business Rule
   var id = current.getValue('sys_id');
   var assignedTo = current.getValue('assigned_to');
+  var TWILIO_FUNCTION_URL = "https://findagent-or-escalate-ivr-service-8284.twil.io/execute";
 
   gs.info('assigned to: ' + assignedTo);
   gs.info('My sys_id is: ' + id);
@@ -9,9 +10,7 @@
 
   //Spin up a REST Message using ServiceNow's Native WebServices API and point to your Twilio Studio Flow REST API Execution URL
   var request = new sn_ws.RESTMessageV2();
-  request.setEndpoint(
-    'https://findagent-or-escalate-ivr-service-8284.twil.io/execute'
-  );
+  request.setEndpoint(TWILIO_FUNCTION_URL);
   request.setHttpMethod('POST');
 
   //Your Twilio Account SID and Auth Token to Authenticate this request
