@@ -91,8 +91,13 @@ Clone the repository
       --handler "index.handler" \
       --environment "Variables={TWILIO_SID=[Your Twilio SID],TWILIO_AUTH_TOKEN=[Your Twilio Token],TWILIO_FUNCTION_URL=https://findagent-or-escalate-ivr-service-5180.twil.io/execute}"
 
-  2. 
+  2.  Create a Kinesis trigger
+      aws lambda create-event-source-mapping --function-name findagent-or-escalate-ivr-fn \
+      --batch-size 1 --starting-position LATEST \
+      --event-source-arn [ARN of the kinesis sink]
 
+  3.  Setup concurrency level [Optional] - This makes sure that you have only 1 instance, good practice to set for demo.
+      aws lambda put-function-concurrency --function-name findagent-or-escalate-ivr-fn --reserved-concurrent-executions 1
 
 <br/><br/>
 
