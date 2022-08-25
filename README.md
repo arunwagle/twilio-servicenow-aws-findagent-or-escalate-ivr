@@ -1,4 +1,18 @@
 # Find Agent or Escalate IVR Demo - Using Twilio, ServiceNow & AWS
+More and more companies are on a journey to manage their digital and IT operations efficiently. Some of the key metrics on which the companies measure the success of their programs are Mean Time to Acknowledge (MTTA), Mean Time to Resolution (MTTR), Average Incident Response Time, Escalation Rate and Cost per incident. One common goal in all the key metrics defined here is how we can act/resolve the incidents and this problem can be easily solved by building an extensible customer engagement platform leveraging various channels like voice, messaging, email, videos etc. 
+ServiceNow has been a de facto standard for building digital workflows for IT operations and Twilio is that next generation fully programmable customer engagement platform. Leveraging AWS Kinesis we can build a fully event driven incident management platform to meet the demands of the customer.
+In this post, I plan to showcase an example of how we can build a fully programmable IVR for managing incidents as they are created in ServiceNow. 
+
+## Use Case 
+When a new incident is recorded in ServiceNow, an automated IVR workflow will be triggered based on the high priority incident business rules created in ServiceNow. The IVR flow will try to find and call an agent who can accept the incident, reject it so that the next available agent can be called and so on. The agent has the ability to escalate it to the appropriate resources until either someone acknowledges the incident by accepting the call or exits the flow. At the end of the flow, the incident ticket is updated with the appropriate comments. 
+
+The application is targeted to improve the incident management workflows for internal IT operations employees and the line of businesses within the company. 
+
+## High Level Architecture
+![High Level Architecture](/assets/Agent Escalation.png?raw=true)
+
+## Find Agent Or Escalate Flow
+![Find Agent Or Escalate Flow](/assets/Agent Escalation Sequence.png?raw=true)
 
 ## Repository Contents
 
