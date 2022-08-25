@@ -9,10 +9,10 @@ When a new incident is recorded in ServiceNow, an automated IVR workflow will be
 The application is targeted to improve the incident management workflows for internal IT operations employees and the line of businesses within the company. 
 
 ## High Level Architecture
-![High Level Architecture](/assets/Agent Escalation.png?raw=true)
+![High Level Architecture](/assets/Agent-Escalation.png?raw=true)
 
 ## Find Agent Or Escalate Flow
-![Find Agent Or Escalate Flow](/assets/Agent Escalation Sequence.png?raw=true)
+![Find Agent Or Escalate Flow](/assets/Agent-Escalation-Sequence.png?raw=true)
 
 ## Repository Contents
 
