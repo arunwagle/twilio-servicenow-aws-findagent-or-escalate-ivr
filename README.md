@@ -86,10 +86,10 @@ Clone the repository
       aws lambda create-function \
       --function-name "findagent-or-escalate-ivr-fn" \
       --runtime "nodejs16.x" \
-      --role "arn:aws:iam::776262733296:role/TwilioLambdaRole" \
+      --role "[Your AWSLambda Role ARN]" \
       --zip-file fileb://demo-ivr-aws-lambda-fns.zip \
       --handler "index.handler" \
-      --environment "Variables={TWILIO_SID=AC8db354e50808dd1a53f83a3822abcf52,TWILIO_AUTH_TOKEN=21752e74ae91a835845a1d1b7202b234,TWILIO_FUNCTION_URL=https://findagent-or-escalate-ivr-service-5180.twil.io/execute}"
+      --environment "Variables={TWILIO_SID=[Your Twilio SID],TWILIO_AUTH_TOKEN=[Your Twilio Token],TWILIO_FUNCTION_URL=https://findagent-or-escalate-ivr-service-5180.twil.io/execute}"
 
   2. 
 
