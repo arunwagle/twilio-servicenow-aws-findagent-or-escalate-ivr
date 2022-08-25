@@ -16,7 +16,7 @@ More and more companies are on a journey to manage their digital and IT operatio
 In this post, I plan to showcase an example of how we can build a fully programmable IVR for managing incidents as they are created in ServiceNow. 
 
 ## Use Case 
-When a new incident is recorded in ServiceNow, an automated IVR workflow will be triggered based on the high priority incident business rules created in ServiceNow. The IVR flow will try to find and call an agent who can accept the incident, reject it so that the next available agent can be called and so on. The agent has the ability to escalate it to the appropriate resources until either someone acknowledges the incident by accepting the call or exits the flow. At the end of the flow, the incident ticket is updated with the appropriate comments. 
+When a new incident is recorded in ServiceNow, an automated IVR workflow will be triggered based on the high priority incident business rules created in ServiceNow. The programmable IVR flow build with Twilio platform will try to find and call an agent who can accept the incident, reject it so that the next available agent can be called and so on. The agent has the ability to escalate it to the appropriate resources until either someone acknowledges the incident by accepting the call or exits the flow. At the end of the flow, the incident ticket is updated with the appropriate comments. 
 
 The application is targeted to improve the incident management workflows for internal IT operations employees and the line of businesses within the company. 
 
