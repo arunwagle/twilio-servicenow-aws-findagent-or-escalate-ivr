@@ -28,8 +28,46 @@ Clone the repository
 ### Setup AWS Components
 
 ```Step 1:``` **Signup** for a [AWS account](https://aws.amazon.com/). <br/><br/>
-```Step 2:``` **Setup** [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) locally. <br/
-```Step 3:``` **Setup Credentials** [AWS Configure](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html#cli-configure-files-methods) locally. 
+
+```Step 2:``` **Setup** [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) locally.<br/><br/>
+
+```Step 3:``` **Create IAM Policies** <br/><br/>
+  1.  Create **User**
+      - Go to AWS Console > IAM > Users > Create User        
+      - Select "Security Credentials" tab and create an access key and secret. Note this down as it will required for local aws configuration.
+  2.  Create **group** - This group will have access to create and manage Kinesis and Lambda
+      - Go to AWS Console > IAM > User Groups > Create Group
+        - Provide name = TwilioGroup
+        - Add the above created user to this group
+        - Add following permisisons to the group
+          - IAMFullAccess
+          - AmazonKinesisFullAccess
+          - AWSLambda_FullAccess
+  3.  **Setup Credentials** [AWS Configure](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html#cli-configure-files-methods) locally. <br/><br/>
+  
+  4. Create Lambda execution **role**
+      - Go to AWS Console > IAM > Roles > Create Role
+        - Provide name = TwilioLambdaRole
+        - Select AWS Service > radio button Use Case "Lambda" 
+        - Add AWSLambdaKinesisExecutionRole   
+        - Create Role
+  <br/><br/>      
+
+```Step 4:``` **Deploy AWS Lambda Function** 
+  1.  Create Deployment
+      - zip -r demo-ivr-aws-lambda-fns.zip .
+      - Create function. Copy the ARN of TwilioLambdaRole created in above step
+      aws lambda create-function \
+      --function-name "findagent-or-escalate-ivr-fn" \
+      --runtime "nodejs16.x" \
+      --role "arn:aws:iam::776262733296:role/TwilioLambdaRole" \
+      --zip-file fileb://demo-ivr-aws-lambda-fns.zip \
+      --handler "index.handler" \
+      --environment "Variables={TWILIO_SID=AC8db354e50808dd1a53f83a3822abcf52,TWILIO_AUTH_TOKEN=21752e74ae91a835845a1d1b7202b234,TWILIO_FUNCTION_URL=https://findagent-or-escalate-ivr-service-5180.twil.io/execute}"
+
+  2. 
+
+
 <br/><br/>
 
 ### Setup Twilio 
@@ -76,15 +114,16 @@ Clone the repository
 ```Step 5:``` Setup **Twilio Event Streams**.  <br/>  
   1.  All the code required for setting up is available at twilio-servicenow-aws-findagent-or-escalate-ivr/demo-twilio-aws-kinesis/*
   2.  Make sure the AWS credentials and AWS CLI are setup correctly as mentioned in steps above.
-  3.  Make sure the [Twilio CLI]((https://www.twilio.com/docs/twilio-cli/plugins#available-plugins) and [create profile](https://www.twilio.com/docs/twilio-cli/general-usage) is setup and created sucessfully.
+  3.  Make sure the [Twilio CLI](https://www.twilio.com/docs/twilio-cli/plugins#available-plugins) and [create profile](https://www.twilio.com/docs/twilio-cli/general-usage) is setup and created sucessfully.
   4.  Follow the steps in [Setup Twilio Streams](https://www.twilio.com/docs/events/eventstreams-quickstart) or run below steps.
       ```
         <!-- use active Twilio account to create the stream -->
         twilio profiles:use Twilio-AW-Profile
         <!-- 
-        Create the stream
+        Create the AWS Kinesis Stream
         stream name = twilio-events
         twilio-sink.json = File where the stream creation output is written
+        Note: After this step you can validate in AWS Console to see if the twilio-events is created under Kinesis > DataStreams
          -->
         ./create_kinesis_stream.sh twilio-events 1 | jq . > twilio-sink.json 
 
@@ -132,7 +171,7 @@ Clone the repository
       - Copy the username(twilio_demo_user) and password. This will be required while setting up Twilio Serverless Functions.  
   2.  Create business rules - This business rule will be triggered when a high priority incident is creatd in ServiceNow.    
       - Click All > System Definition > Business Rules 
-      - Click on New 
+      - Click on New . 
       - Fill details as per the image below  
       - Click on Advanced tab.  
         - Open twilio-servicenow-aws-findagent-or-escalate-ivr/twilio_studio_new_incident.js  

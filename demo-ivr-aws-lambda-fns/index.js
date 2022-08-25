@@ -15,10 +15,10 @@ exports.handler = function(event, context) {
         console.log('flow_id:', flow_id);
         console.log('flow_execution_id:', flow_execution_id);
         
-        const twilio_function_url = "https://adobe-ivr-service-8284.twil.io/execute";
+        const twilio_function_url = process.env.TWILIO_FUNCTION_URL;;
 
-        var twilio_sid = 'AC8db354e50808dd1a53f83a3822abcf52';
-        var twilio_auth_token = '453192fa355e1645483d3a28e1cf2fab';
+        var twilio_sid = process.env.TWILIO_SID;
+        var twilio_auth_token = process.env.TWILIO_AUTH_TOKEN;
     
         const token = `${twilio_sid}:${twilio_auth_token}`;
         const encodedToken = Buffer.from(token).toString('base64');
