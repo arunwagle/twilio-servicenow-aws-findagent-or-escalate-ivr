@@ -128,7 +128,7 @@ Clone the repository
   5.  Click Settings > Dependencies
       - Add axios dependencies
   6.  Click Settings > Environment variables    
-      - SN_API_TABLE_ROOT - Your ServiceNow developer instance "Table" url https://dev86397.service-now.com/api/now/table/    
+      - SN_API_TABLE_ROOT - Your ServiceNow developer instance "Table" url https://[URL].service-now.com/api/now/table/    
       - SN_USER - ServiceNow username(twilio_demo_user)
       - SN_PASSWORD - Password of the above user.
       - FROM - Phone number provisioned in Step2 above
@@ -209,6 +209,17 @@ Clone the repository
         - Modify TWILIO_FUNCTION_URL value to point to the Twilio Serverless function execute.js deployed as per the steps above. 
         - Copy the contents of execute.js into the "Advanced Script" tab in ServiceNow. 
         - Submit to create the business rule. 
+
+## Run the demo
+
+1.  Login to ServiceNow developer instance
+2.  Go to Menu All > Incidents > New
+3.  Fill all required details including short description of the incident
+4.  Select Urgency = High and Submit. This will invoke the business rule to trigger the Twilio IVR Flow
+5.  The IVR flow will call the phone number configured as a part of Twilio Serverless Functions setup . Refer to  <a href=”https://github.com/arunwagle/twilio-servicenow-aws-findagent-or-escalate-ivr#setup-twilio”  target="_blank">Twilio Serverless Functions setup</a>	
+6.  Listen to the options . Press 1 to accept the call,  2 to transfer to the next agent or 3 to escalate.
+7.  Try out all the options and check the status of the incident in ServiceNow. The Additional comments (Customer visible) section will be populated with the appropriate comments.
+8.  End the demo.
 
 
 # DISCLAIMER
